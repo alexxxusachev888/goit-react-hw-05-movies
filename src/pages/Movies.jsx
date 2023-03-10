@@ -5,14 +5,13 @@ import { fetchMovies } from '../api/tmb-api-service';
 const Movies = ()=> {
     const [movies, setMovies] = useState([]);
     const [searchParams, setSearchParams] = useSearchParams();
-    const query = searchParams.get("query");
+    const query = searchParams.get('query');
+   console.log(movies)
 
-    console.log(query)
-
-    useEffect(()=> {
-        const foundMoviesArr = async (search) => {
+    useEffect(()=>{
+        const foundMoviesOnSearch = async (request) => {
             try {
-              const movieArr = await fetchMovies(search);
+              const movieArr = await fetchMovies(request);
               setMovies(movieArr);
 
             } catch (error) {
@@ -20,8 +19,7 @@ const Movies = ()=> {
             }
         }
 
-        foundMoviesArr(query);
-
+        foundMoviesOnSearch(query);
     },[query])
 
     return (
@@ -29,7 +27,7 @@ const Movies = ()=> {
         <h1>Movies Page</h1>
 
         <form >
-            <input type='text' value={query} onChange={evt => setSearchParams({ query: evt.target.value })} />
+            <input type='text' value={query ?? ''} onChange={(evt) => {setSearchParams({query: evt.target.value})}}/>
             <button type='submit'>Search</button>
         </form>
         </>

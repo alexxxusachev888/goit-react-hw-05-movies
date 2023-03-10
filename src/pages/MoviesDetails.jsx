@@ -30,8 +30,8 @@ const MoviesDetails = ()=> {
         <p>{movieDetails.overview}</p>
 
         <nav>
-            <Link to='reviews'>Reviews</Link>
-            <Link to='cast'>Cast</Link>
+            <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
+            <Link to={`/movies/${movieId}/cast`}>Cast</Link>
         </nav>
             <Outlet/>       
         </>
