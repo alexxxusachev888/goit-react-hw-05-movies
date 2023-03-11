@@ -1,10 +1,12 @@
-import { useParams, Link, Outlet } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { fetchMovieById } from '../api/tmb-api-service';
+import MovieDetails from '../components/MovieDetails/MovieDetails';
 
 const MoviesDetails = ()=> {
     const {movieId} = useParams();
-    const [movieDetails, setMovieDetails] = useState([])
+    const [movieDetails, setMovieDetails] = useState([]);
+    const location = useLocation();
 
     useEffect(()=> {
         const foundMovieDetails = async (movId) => {
@@ -18,25 +20,13 @@ const MoviesDetails = ()=> {
         }
 
         foundMovieDetails(movieId);
-
     }, [movieId])
 
-
-    return (
-        <>
-        <h1>Movies Details Page</h1>
-
-        <p>{movieDetails.original_title}</p>
-        <p>{movieDetails.overview}</p>
-
-        <nav>
-            <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
-            <Link to={`/movies/${movieId}/cast`}>Cast</Link>
-        </nav>
-            <Outlet/>       
-        </>
-        
-    )
+    return (<MovieDetails 
+                movieId={movieId} 
+                movieDetails={movieDetails}
+                location={location}
+            />)
 }
 
 export default MoviesDetails;

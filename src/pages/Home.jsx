@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import {fetchTrends} from '../api/tmb-api-service';
+import MovieList from '../components/MovieList/MovieList';
 
 
 const Home = ()=> {
@@ -23,7 +23,7 @@ const [movies, setTrendingMovies] = useState([]);
     return (
         <>
         <h1>Home Page</h1>
-        {movies.map((item)=> (<Link to={`/movies/${item.id}`}><p>{item.title}</p></Link>))}
+        <MovieList movieArr={movies}/>
         </>
     )
 }

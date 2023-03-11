@@ -1,8 +1,7 @@
 
 const KEY_API = '0b11624b950ea9c4284f61844023b09c';
 const BASE_URL = 'https://api.themoviedb.org/3/';
-/* const BASE_URL_IMG = 'https://image.tmdb.org/t/p/w500';
- */
+
 export const fetchTrends = async () => {
   try {
     const response = await fetch(`${BASE_URL}trending/all/day?api_key=${KEY_API}`);
