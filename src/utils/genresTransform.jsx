@@ -1,5 +1,5 @@
 const genresConvertor = (genre_ids) => {
-    const parcedGenres = JSON.parse(localStorage.getItem('genresList'));
+    const parcedGenres = localStorage.getItem('genresList') ? JSON.parse(localStorage.getItem('genresList')) : {};
     const result = genre_ids.map(id => parcedGenres[id]).filter(item => item !== undefined);
 
     if (result.length > 2) {

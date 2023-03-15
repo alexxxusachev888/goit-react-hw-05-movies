@@ -4,21 +4,23 @@ import { fetchTrends, fetchGenres } from '../api/tmbApiService';
 import MovieList from '../components/MovieList/MovieList';
 
 const Home = ()=> {
-const [movies, setTrendingMovies] = useState([]);
-const location = useLocation();
+  const [movies, setTrendingMovies] = useState([]);
+  const location = useLocation();
+  
 
     useEffect(()=>{
         const trendingMoviesArr = async () => {
             try {
               const movieArr = await fetchTrends();
               setTrendingMovies(movieArr);
-              fetchGenres();
+              
 
             } catch (error) {
               console.log(error);
             }
         }
-
+        
+        fetchGenres();
         trendingMoviesArr();
     },[])
 
