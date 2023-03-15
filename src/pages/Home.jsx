@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
-import {fetchTrends} from '../api/tmb-api-service';
+import { useLocation } from 'react-router-dom';
+import { fetchTrends, fetchGenres } from '../api/tmbApiService';
 import MovieList from '../components/MovieList/MovieList';
-
 
 const Home = ()=> {
 const [movies, setTrendingMovies] = useState([]);
+const location = useLocation();
 
     useEffect(()=>{
         const trendingMoviesArr = async () => {
             try {
               const movieArr = await fetchTrends();
               setTrendingMovies(movieArr);
+              fetchGenres();
 
             } catch (error) {
               console.log(error);
@@ -22,8 +24,7 @@ const [movies, setTrendingMovies] = useState([]);
 
     return (
         <>
-        <h1>Home Page</h1>
-        <MovieList movieArr={movies}/>
+        <MovieList movieArr={movies} location={location}/>
         </>
     )
 }

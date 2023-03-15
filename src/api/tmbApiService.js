@@ -6,7 +6,9 @@ export const fetchTrends = async () => {
   try {
     const response = await fetch(`${BASE_URL}trending/all/day?api_key=${KEY_API}`);
     const data = await response.json();
+    console.log(data.results);
     return data.results;
+    
 
   } catch (error) {
     console.log(error);
@@ -55,6 +57,24 @@ export const fetchMovies = async (movieSearch) => {
       const response = await fetch(`${BASE_URL}movie/${movie}/credits?api_key=${KEY_API}&language=en-US&page=1`)
       const data = await response.json();
       return data.cast;
+  
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  export const fetchGenres = async () => {
+
+    try {
+      const response = await fetch(`${BASE_URL}genre/movie/list?api_key=${KEY_API}&language=en-US`)
+      const data = await response.json();
+
+      const genresList = data.genres.reduce((acc, { id, name }) => {
+        acc[id] = name;
+        return acc;
+        }, {});
+
+        localStorage.setItem('genresList', JSON.stringify(genresList));
   
     } catch (error) {
       console.log(error);

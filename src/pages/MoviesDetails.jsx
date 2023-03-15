@@ -1,12 +1,13 @@
 import { useParams, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { fetchMovieById } from '../api/tmb-api-service';
+import { fetchMovieById } from '../api/tmbApiService';
 import MovieDetails from '../components/MovieDetails/MovieDetails';
 
 const MoviesDetails = ()=> {
     const {movieId} = useParams();
     const [movieDetails, setMovieDetails] = useState([]);
     const location = useLocation();
+    console.log(movieDetails)
 
     useEffect(()=> {
         const foundMovieDetails = async (movId) => {
@@ -23,7 +24,6 @@ const MoviesDetails = ()=> {
     }, [movieId])
 
     return (<MovieDetails 
-                movieId={movieId} 
                 movieDetails={movieDetails}
                 location={location}
             />)

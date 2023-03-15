@@ -1,37 +1,45 @@
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { Suspense } from "react";
+import { Spinner } from '../Spinner/Spinner';
+import PropTypes from 'prop-types';
+import {GoBackLink, ContentWrapper, Img, DescrWrapper, Title, UserScore , SubTitle, Overview, SubSubTitle, GenresList, StyledNavLink, NavBar} from './MovieDetails.styled'
 
-const MovieDetails = ({movieId, movieDetails, location})=> {
-    //const BASE_URL_IMG = 'https://image.tmdb.org/t/p/w500';
+const MovieDetails = ({movieDetails: {poster_path, genres, original_title, overview, vote_average}, location})=> {
     const backLinkHref = location.state?.from ?? "/movies";
+    const BASE_URL_IMG = 'https://image.tmdb.org/t/p/w500';
 
     return(
         <>
-        <Link to={backLinkHref}> Back to Movies</Link>
-        <h1>Movies Details Page</h1>
-        <p>{movieDetails.original_title}</p>
-        <p>{movieDetails.popularity}</p>
-        <p>{movieDetails.overview}</p>
-        
-        {/* <img src={`${BASE_URL_IMG}${movieDetails.backdrop_path}`} alt="movieDetails.original_title" />
-        <p>{movieDetails.original_title}</p>
-        <p>{movieDetails.popularity}</p>
-        <p>{movieDetails.overview}</p>
-        <p>{movieDetails.genres}</p> */}
+        <GoBackLink to={backLinkHref}> Back to Movies</GoBackLink>
+        <ContentWrapper>
+                <Img src={`${BASE_URL_IMG}${poster_path}`} alt={original_title}/>
+            <DescrWrapper>  
+                <Title>{original_title}</Title>
+                <UserScore>Users score: {`${(vote_average * 10).toFixed(0)}%`}</UserScore>
+                <SubTitle>Overview</SubTitle>
+                <Overview>{overview}</Overview>
+                <SubSubTitle>Genres</SubSubTitle>
+                {genres && (<GenresList>
+                                {genres.map(({ name, id }) => <li key={id}>{name}</li>)}
+                            </GenresList>)}
+                <NavBar>
+                    <StyledNavLink to='reviews'>Reviews</StyledNavLink>
+                    <StyledNavLink to='cast'>Cast</StyledNavLink>
+                </NavBar>
+            </DescrWrapper>
+        </ContentWrapper>
 
-        <nav>
-            <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
-            <Link to={`/movies/${movieId}/cast`}>Cast</Link>
-        </nav>
-
-        <Suspense fallback={<div>Loading subpage...</div>}>
+        <Suspense fallback={<Spinner />}>
             <Outlet/>   
         </Suspense>
                
         </>
     )
-
-
 }
 
 export default MovieDetails;
+
+MovieDetails.propTypes = {
+    movieDetails: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+}

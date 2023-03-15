@@ -1,6 +1,9 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { fetchMovieReviews } from '../../api/tmb-api-service';
+import { RxAvatar } from 'react-icons/rx';
+import { fetchMovieReviews } from '../../api/tmbApiService';
+import shortReview from '../../utils/makeItShort';
+import { ReviewsWrapper, ReviewCard, InnerWrapper, Author, Content } from './Reviews.styled';
 
 const Reviews = ()=> {
   const { movieId } = useParams();
@@ -20,20 +23,22 @@ const Reviews = ()=> {
     foundMovieReviews(movieId);
   }, [movieId]);
 
+  
   return (
-    <>
-    {reviews.map(({username, content})=> {
-        return (
-            <>
-            <div>
-                <p>{username}</p>
-                <p>{content}</p>
-            </div>
-            </>
-        )
-
-    })}
-    </>
+    
+    <ReviewsWrapper>
+    {reviews.map(({id, author, content})=> {
+          return (
+              <ReviewCard key={id}>
+                  <InnerWrapper>
+                    <RxAvatar size={32} style={{color: '#B1A296'}}/>
+                    <Author>{author}</Author>
+                  </InnerWrapper>
+                  <Content>{shortReview(content)}</Content>
+              </ReviewCard>
+          )
+      })}
+    </ReviewsWrapper>
   )
 
 }
