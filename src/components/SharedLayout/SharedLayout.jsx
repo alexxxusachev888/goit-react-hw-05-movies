@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 import { Suspense } from "react";
 import { FiFilm } from 'react-icons/fi';
 import { BsGithub, BsLinkedin } from 'react-icons/bs';
@@ -27,8 +27,8 @@ const SharedLayout = ()=> {
             <Footer>
                 <p>© 2023 | All Rights Reserved | Developed by Oleksandr Usachov </p>
                 <SocialList>
-                    <li><BsGithub size={25}/></li>
-                    <li><BsLinkedin size={25}/></li>
+                    <li><Link to='https://github.com/alexxxusachev888'><BsGithub size={25}/></Link></li>
+                    <li><Link to='https://www.linkedin.com/in/oleksandr-usachov/'><BsLinkedin size={25}/></Link></li>
                 </SocialList>
                 
             </Footer>

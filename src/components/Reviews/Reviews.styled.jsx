@@ -11,6 +11,11 @@ export const ReviewsWrapper = styled.ul`
 
 export const ReviewCard = styled.li`
     width: 380px;
+
+     @media screen and (min-width: 768px) {
+        justify-content: space-between;
+        width: 350px;
+     }
 `
 
 export const InnerWrapper = styled.div`

@@ -21,16 +21,48 @@ export const Container = styled.div`
     padding-right: 20px;
     margin-left: auto;
     margin-right: auto;
+
+    @media screen and (min-width: 320px) {
+        width: 320px;
+      }
+    
+      @media screen and (min-width: 768px) {
+        width: 768px;
+        padding-left: 32px;
+        padding-right: 32px;
+      }
+    
+      @media screen and (min-width: 1280px) {
+        width: 1280px;
+        padding-left: 32px;
+        padding-right: 32px;
+      }
 `
 
 export const Header = styled.header`
-
-    padding: 0 50px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center;    
+    padding: 0 50px;
     background-color: ${(prop)=> prop.theme.header};
     height: 130px;
+
+    @media screen and (min-width: 320px) {
+        padding: 10px 50px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    
+      @media screen and (min-width: 768px) {
+        justify-content: space-between;
+      }
+    
+      @media screen and (min-width: 1280px) {
+        
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
 `
 
 export const Navigation = styled.nav`
@@ -60,16 +92,49 @@ export const Footer = styled.footer`
     height: 80px;
     background-color: ${(prop)=> prop.theme.footer};
 
+    @media screen and (min-width: 320px) {
+        p {
+            text-align: center;
+            line-height: 30px;
+        }
+
+        padding: 15px 20px;
+        height: 120px;
+        flex-wrap: wrap;
+      }
+    
+      @media screen and (min-width: 768px) {
+        
+      }
+    
+      @media screen and (min-width: 1280px) {
+        
+       
+      }
+
 `
 
 export const SocialList = styled.ul`
     display: flex;
-    justify-content: center;
     align-items: center;
-    margin-left: 25px;
     height: 80px;
     background-color: ${(prop)=> prop.theme.footer};
     gap: 10px;
+
+    @media screen and (min-width: 320px) {
+        justify-content: center;
+        gap: 25px;
+        height: 40px;
+       }
+
+    @media screen and (min-width: 768px) {
+        margin-left: 25px;
+    }
+    
+    @media screen and (min-width: 1280px) {
+        
+    }
+       
    
 `
   

@@ -16,9 +16,21 @@ export const GoBackLink = styled(Link)`
 `
 export const ContentWrapper = styled.div`
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 60px;
     margin-top: 20px;
+
+    @media screen and (min-width: 320px) {
+       flex-wrap: wrap;
+    }
+
+    @media screen and (min-width: 768px) {
+        margin-top: 40px;
+    }
+    
+    @media screen and (min-width: 1280px) {
+        margin-top: 20px;
+    }
 
 `
 export const Img = styled.img`
@@ -26,6 +38,16 @@ export const Img = styled.img`
     height: 400px;
     object-fit: cover;
     border-radius: 5px;
+
+    @media screen and (min-width: 768px) {
+        width: 500px;
+        height: 700px;
+     }
+     
+     @media screen and (min-width: 1280px) {
+        width: 350px;
+        height: 450px;
+     }
 `
 
 export const DescrWrapper = styled.div`
@@ -33,6 +55,18 @@ export const DescrWrapper = styled.div`
     flex-direction: column;
     justify-content: space-between;
     width: 450px;
+
+    @media screen and (min-width: 320px) {
+        margin-bottom: 30px;
+     }
+
+     @media screen and (min-width: 768px) {
+        width: 500px;;
+     }
+     @media screen and (min-width: 1280px) {
+        width: 450px;
+        height: 450px;
+     }
 
 `
 export const Title = styled.h1`
