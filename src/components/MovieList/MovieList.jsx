@@ -4,8 +4,12 @@ import { getYear } from 'date-fns'
 import { MoviesWrapper, MovieCard, DescrWrapper, InnerWrapper, Title, Img, VoteAverege, Genres, ReleaseDate} from './MovieList.styled';
 import genresConvertor from '../../utils/genresTransform';
 
-const MovieList = ({movieArr, location})=> {
+const MovieList = ({movieArr = [], location})=> {
     const BASE_URL_IMG = 'https://image.tmdb.org/t/p/w500';
+
+    if (!Array.isArray(movieArr)) {
+        return <div>Movie array is not defined or not an array</div>;
+    }
 
     return(
         <MoviesWrapper>

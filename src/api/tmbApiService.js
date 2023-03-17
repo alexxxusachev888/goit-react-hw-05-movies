@@ -1,26 +1,29 @@
-
+import { toast } from 'react-toastify';
 const KEY_API = '0b11624b950ea9c4284f61844023b09c';
 const BASE_URL = 'https://api.themoviedb.org/3/';
 
-export const fetchTrends = async () => {
+export const fetchTrends = async (pageNum = 1) => {
   try {
-    const response = await fetch(`${BASE_URL}trending/all/day?api_key=${KEY_API}`);
+    const response = await fetch(`${BASE_URL}trending/all/day?api_key=${KEY_API}&page=${pageNum}`);
     const data = await response.json();
-    console.log(data.results);
-    return data.results;
-    
+    return data;
 
   } catch (error) {
     console.log(error);
   }
 }
 
-export const fetchMovies = async (movieSearch) => {
+export const fetchMovies = async (movieSearch, pageNum = 1) => {
 
   try {
-    const response = await fetch(`${BASE_URL}search/movie?api_key=${KEY_API}&query=${movieSearch}&language=en-US&page=1&include_adult=false`)
+    const response = await fetch(`${BASE_URL}search/movie?api_key=${KEY_API}&query=${movieSearch}&language=en-US&page=${pageNum}&include_adult=false`)
     const data = await response.json();
-    return data.results;
+    
+    if(data.results.length === 0) {
+      toast.warn('Nothing was found on your request')
+    } 
+    
+    return data;
 
   } catch (error) {
     console.log(error);

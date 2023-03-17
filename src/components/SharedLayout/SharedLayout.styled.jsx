@@ -62,5 +62,15 @@ export const Footer = styled.footer`
 
 `
 
+export const SocialList = styled.ul`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 25px;
+    height: 80px;
+    background-color: ${(prop)=> prop.theme.footer};
+    gap: 10px;
+   
+`
   
   

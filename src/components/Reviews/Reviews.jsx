@@ -5,6 +5,7 @@ import { fetchMovieReviews } from '../../api/tmbApiService';
 import shortReview from '../../utils/makeItShort';
 import { ReviewsWrapper, ReviewCard, InnerWrapper, Author, Content } from './Reviews.styled';
 
+
 const Reviews = ()=> {
   const { movieId } = useParams();
   const [ reviews, setReviews] = useState([]);
@@ -27,17 +28,23 @@ const Reviews = ()=> {
   return (
     
     <ReviewsWrapper>
-    {reviews.map(({id, author, content})=> {
+    {reviews.length ? reviews.map(({id, author, content})=> {
           return (
               <ReviewCard key={id}>
                   <InnerWrapper>
                     <RxAvatar size={32} style={{color: '#B1A296'}}/>
                     <Author>{author}</Author>
                   </InnerWrapper>
-                  <Content>{shortReview(content)}</Content>
+                 <Content>{shortReview(content)}</Content>
               </ReviewCard>
           )
-      })}
+      }) : <div style={{display: 'flex'}}>
+        <img src='https://media0.giphy.com/media/QPQ3xlJhqR1BXl89RG/200.webp?cid=ecf05e47oeisg3o2v6zfwr5kukig5sa97vyumtbagi4uuum0&rid=200.webp&ct=g' alt='waiting for reviews'/>
+        <img src='https://media0.giphy.com/media/QPQ3xlJhqR1BXl89RG/200.webp?cid=ecf05e47oeisg3o2v6zfwr5kukig5sa97vyumtbagi4uuum0&rid=200.webp&ct=g' alt='waiting for reviews'/>
+        <img src='https://media0.giphy.com/media/QPQ3xlJhqR1BXl89RG/200.webp?cid=ecf05e47oeisg3o2v6zfwr5kukig5sa97vyumtbagi4uuum0&rid=200.webp&ct=g' alt='waiting for reviews'/>
+        <img src='https://media0.giphy.com/media/QPQ3xlJhqR1BXl89RG/200.webp?cid=ecf05e47oeisg3o2v6zfwr5kukig5sa97vyumtbagi4uuum0&rid=200.webp&ct=g' alt='waiting for reviews'/>
+        <img src='https://media0.giphy.com/media/QPQ3xlJhqR1BXl89RG/200.webp?cid=ecf05e47oeisg3o2v6zfwr5kukig5sa97vyumtbagi4uuum0&rid=200.webp&ct=g' alt='waiting for reviews'/>
+        </div>}
     </ReviewsWrapper>
   )
 
