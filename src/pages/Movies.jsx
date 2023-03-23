@@ -1,28 +1,27 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef  } from 'react';
 import { useSearchParams, useLocation } from "react-router-dom";
 import { fetchMovies } from '../api/tmbApiService';
 import { debounce } from "lodash";
-
+import { MovieSearchPlug } from "../components/PlugComponents/Plug"
 import MovieList from '../components/MovieList/MovieList';
 import SearchField from '../components/SearchField/SearchField';
 import Pagination from '../components/Pagination/Pagination';
 
 const Movies = ()=> {
-    const location = useLocation();
     const [movies, setMovies] = useState({ results: [] });
     const [searchParams, setSearchParams] = useSearchParams({
       query: '',
       page: 1,
     });
+    const isFirstRender = useRef(true);
+    const location = useLocation();
     const query = searchParams.get('query') ?? '';
-    const pageNum = Number(searchParams.get('page'))
-    console.log(query);
-    console.log(pageNum);
+    const pageNum = Number(searchParams.get('page')) || 1;
 
     useEffect(()=>{
         const foundMoviesOnSearch = async (request) => {
             try {
-              const movieArr = await fetchMovies(request, pageNum);
+              const movieArr = await fetchMovies(request, pageNum, isFirstRender.current);
               setMovies(movieArr);
 
             } catch (error) {
@@ -30,10 +29,14 @@ const Movies = ()=> {
             }
         }
 
-        const debouncedSearch = debounce(foundMoviesOnSearch, 400);
-        debouncedSearch(query);
-
-        return () => debouncedSearch.cancel();
+        if (!isFirstRender.current) {
+          const debouncedSearch = debounce(foundMoviesOnSearch, 400);
+          debouncedSearch(query);
+          
+          return () => debouncedSearch.cancel();
+        } else {
+          isFirstRender.current = false;
+        }
     },[query, pageNum])
 
     const updateQueryString = (query) => {
@@ -45,18 +48,16 @@ const Movies = ()=> {
         <>
         <SearchField value={query} queryString={updateQueryString}/>
         {movies.results.length ? <>
-        <MovieList movieArr={movies.results} location={location}/>
-        <Pagination 
-          itemsPerPage={20}
-          totalItems={movies.total_results}
-          setSearchParams={setSearchParams}
-          params={searchParams}
-          location={location}/>
-        </> : <img style={{height: '550px'}}src='https://i.pinimg.com/originals/44/5f/1a/445f1ab89041d998d9fa937ad7f9efa3.gif' alt='waiting cat'/>}
+          <MovieList movieArr={movies.results} location={location}/>
+          <Pagination 
+            itemsPerPage={20}
+            totalItems={movies.total_results}
+            setSearchParams={setSearchParams}
+            params={searchParams}
+            location={location}/>
+          </> : <MovieSearchPlug/>}
         </>
     )
 }
 
 export default Movies;
-
-//https://i.pinimg.com/originals/44/5f/1a/445f1ab89041d998d9fa937ad7f9efa3.gif

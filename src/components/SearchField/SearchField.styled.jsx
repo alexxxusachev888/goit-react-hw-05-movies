@@ -3,7 +3,7 @@ import { BsSearch } from 'react-icons/bs';
 
 export const Search = styled.form`
     position: absolute;
-    top: 170px;
+    top: 152px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;

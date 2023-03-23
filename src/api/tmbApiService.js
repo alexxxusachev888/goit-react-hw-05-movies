@@ -13,15 +13,15 @@ export const fetchTrends = async (pageNum = 1) => {
   }
 }
 
-export const fetchMovies = async (movieSearch, pageNum = 1) => {
+export const fetchMovies = async (movieSearch = '', pageNum = 1, isInitialRender = false) => {
 
   try {
     const response = await fetch(`${BASE_URL}search/movie?api_key=${KEY_API}&query=${movieSearch}&language=en-US&page=${pageNum}&include_adult=false`)
     const data = await response.json();
     
-    if(data.results.length === 0) {
-      toast.warn('Nothing was found on your request')
-    } 
+    if (!isInitialRender && data.results.length === 0) {
+      toast.warn('Nothing was found on your request');
+    }
     
     return data;
 

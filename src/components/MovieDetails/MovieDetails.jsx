@@ -1,8 +1,19 @@
+import PropTypes from 'prop-types';
 import { Outlet } from "react-router-dom";
 import { Suspense } from "react";
 import { Spinner } from '../Spinner/Spinner';
-import PropTypes from 'prop-types';
-import {GoBackLink, ContentWrapper, Img, DescrWrapper, Title, UserScore , SubTitle, Overview, SubSubTitle, GenresList, StyledNavLink, NavBar} from './MovieDetails.styled'
+import {GoBackLink, 
+    ContentWrapper, 
+    Img, 
+    DescrWrapper, 
+    Title, 
+    UserScore, 
+    SubTitle, 
+    Overview, 
+    SubSubTitle, 
+    GenresList, 
+    StyledNavLink, 
+    NavBar} from './MovieDetails.styled'
 
 const MovieDetails = ({movieDetails: {poster_path, genres, original_title, overview, vote_average}, location})=> {
     const backLinkHref = location.state?.from ?? "/movies";
@@ -23,8 +34,8 @@ const MovieDetails = ({movieDetails: {poster_path, genres, original_title, overv
                                 {genres.map(({ name, id }) => <li key={id}>{name}</li>)}
                             </GenresList>)}
                 <NavBar>
-                    <StyledNavLink to='reviews'>Reviews</StyledNavLink>
-                    <StyledNavLink to='cast'>Cast</StyledNavLink>
+                    <StyledNavLink to='reviews' location={location}>Reviews</StyledNavLink>
+                    <StyledNavLink to='cast' location={location}>Cast</StyledNavLink>
                 </NavBar>
             </DescrWrapper>
         </ContentWrapper>

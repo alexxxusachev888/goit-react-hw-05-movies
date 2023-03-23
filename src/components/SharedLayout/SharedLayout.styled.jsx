@@ -102,15 +102,6 @@ export const Footer = styled.footer`
         height: 120px;
         flex-wrap: wrap;
       }
-    
-      @media screen and (min-width: 768px) {
-        
-      }
-    
-      @media screen and (min-width: 1280px) {
-        
-       
-      }
 
 `
 

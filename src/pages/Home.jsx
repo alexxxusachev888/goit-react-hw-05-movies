@@ -9,7 +9,6 @@ const Home = ()=> {
   const [movies, setTrendingMovies] = useState({ results: [] });
   const location = useLocation();
   const pageNum = Number(searchParams.get('page')) || 1;
-  console.log(movies)
   
     useEffect(()=>{
         const trendingMoviesArr = async (page) => {

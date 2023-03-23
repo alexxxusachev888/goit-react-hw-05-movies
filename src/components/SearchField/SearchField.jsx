@@ -1,7 +1,5 @@
 import { Search, Input, SearchIcon } from './SearchField.styled';
 
-
-
 export const SearchField = ({value, queryString}) => {
 
     return (

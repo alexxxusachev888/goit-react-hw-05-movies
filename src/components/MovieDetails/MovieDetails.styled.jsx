@@ -65,7 +65,7 @@ export const DescrWrapper = styled.div`
      }
      @media screen and (min-width: 1280px) {
         width: 450px;
-        height: 450px;
+        min-height: 450px;
      }
 
 `

@@ -7,7 +7,6 @@ const MoviesDetails = ()=> {
     const {movieId} = useParams();
     const [movieDetails, setMovieDetails] = useState([]);
     const location = useLocation();
-    console.log(movieDetails)
 
     useEffect(()=> {
         const foundMovieDetails = async (movId) => {
